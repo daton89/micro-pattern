@@ -1,0 +1,35 @@
+version: '2.1'
+
+services:
+  micro-pattern:
+    image: micro-pattern
+    build: .
+    ports:
+      - 3000:3000
+
+  ory-hydra-example--postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=hydra
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=hydra
+    networks: 
+      - hydraguide
+
+  ory-hydra-example--hydra:
+    image: oryd/hydra:v0.11.6
+    ports:
+      - 4444:4444
+    environment:
+      - DATABASE_URL=$DATABASE_URL
+      - SYSTEM_SECRET=$SYSTEM_SECRET
+      - ISSUER=https://localhost:4444
+      - CONSENT_URL=http://localhost:9020/consent
+      - FORCE_ROOT_CLIENT_CREDENTIALS=admin:demo-password
+    networks: 
+      - hydraguide
+
+networks: 
+  hydraguide: 
+    external: false
+    driver: bridge
