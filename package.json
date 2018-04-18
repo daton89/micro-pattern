@@ -1,0 +1,15 @@
+{
+  "name": "micro-pattern",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/daton89/micro-pattern.git",
+  "author": "Toni D'Angelo <tonydangelo123@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "db": "docker-compose up -d ory-hydra-example--postgres",
+    "migrate": "docker run -it --rm --network micropattern_hydraguide oryd/hydra:v0.11.6 migrate sql $DATABASE_URL",
+    "hydra": "docker-compose up -d ory-hydra-example--hydra",
+    "issue-access-token": "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide oryd/hydra:v0.11.6 token client --skip-tls-verify",
+    "validate-token": "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password -e TOKEN=$token --network micropattern_hydraguide oryd/hydra:v0.11.6 token validate --skip-tls-verify 02128bR3hI_gtvYCpqGPuJo1eQZha2Cpbpby6TdpCVI.xduHY112MaoywielwOWiO8xFBRZ5FwVAJaATMbUaIAI"
+  }
+}
