@@ -29,6 +29,18 @@ services:
     networks: 
       - hydraguide
 
+  ory-hydra-example--consent:
+    image: oryd/hydra-consent-app-express
+    ports:
+      - 9020:3000
+    environment:
+      - HYDRA_CLIENT_ID=consent-app
+      - HYDRA_CLIENT_SECRET=consent-secret
+      - HYDRA_URL=https://ory-hydra-example--hydra:4444
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    networks: 
+      - hydraguide
+
 networks: 
   hydraguide: 
     external: false
