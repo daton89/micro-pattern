@@ -7,9 +7,17 @@
   "license": "MIT",
   "scripts": {
     "db": "docker-compose up -d ory-hydra-example--postgres",
-    "migrate": "docker run -it --rm --network micropattern_hydraguide oryd/hydra:v0.11.6 migrate sql $DATABASE_URL",
+    "migrate":
+      "docker run -it --rm --network micropattern_hydraguide oryd/hydra:v0.11.6 migrate sql $DATABASE_URL",
     "hydra": "docker-compose up -d ory-hydra-example--hydra",
-    "issue-access-token": "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide oryd/hydra:v0.11.6 token client --skip-tls-verify",
-    "validate-token": "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password -e TOKEN=$token --network micropattern_hydraguide oryd/hydra:v0.11.6 token validate --skip-tls-verify 02128bR3hI_gtvYCpqGPuJo1eQZha2Cpbpby6TdpCVI.xduHY112MaoywielwOWiO8xFBRZ5FwVAJaATMbUaIAI"
+    "issue-access-token":
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide oryd/hydra:v0.11.6 token client --skip-tls-verify",
+    "validate-token":
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password -e TOKEN=$token --network micropattern_hydraguide oryd/hydra:v0.11.6 token validate --skip-tls-verify uZOQfcg8mKKQ8X7ZL1Nrw2RlCB8vK7vGQ0Fcuke4XEc.IDUIB9xQ_qLsjaN_MYBnah-3QKVcPLsFP3NYYH0NljE",
+    "create-client-consent-app":
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 clients create --skip-tls-verify --id consent-app --secret consent-secret --name \"Consent App Client\" --grant-types client_credentials --response-types token --allowed-scopes hydra.consent",
+    "create-policy":
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 policies create --skip-tls-verify --actions get,accept,reject --description \"Allow consent-app to manage OAuth2 consent requests.\" --allow --id consent-app-policy --resources \"rn:hydra:oauth2:consent:requests:<.*>\" --subjects consent-app",
+    "consent-app": "docker-compose up -d ory-hydra-example--consent"
   }
 }
