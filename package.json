@@ -20,6 +20,8 @@
       "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 policies create --skip-tls-verify --actions get,accept,reject --description \"Allow consent-app to manage OAuth2 consent requests.\" --allow --id consent-app-policy --resources \"rn:hydra:oauth2:consent:requests:<.*>\" --subjects consent-app",
     "consent-app": "docker-compose up -d ory-hydra-example--consent",
     "setup-console-ui":
-      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 clients create --skip-tls-verify --id subjects:security-console-ui --name \"Security Console UI\" --is-public --allowed-scopes \"openid,offline,hydra.*,oathkeeper.rules.*\" --response-types id_token,code --grant-types refresh_token,authorization_code --callbacks https://console.ory.am/auth/callback"
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 clients create --skip-tls-verify --id subjects:security-console-ui --name \"Security Console UI\" --is-public --allowed-scopes \"openid,offline,hydra.*,oathkeeper.rules.*\" --response-types id_token,code --grant-types refresh_token,authorization_code --callbacks https://console.ory.am/auth/callback",
+    "setup-policy-console-ui":
+      "docker run --rm -it -e CLUSTER_URL=https://ory-hydra-example--hydra:4444 -e CLIENT_ID=admin -e CLIENT_SECRET=demo-password --network micropattern_hydraguide -p 9010:4445 oryd/hydra:v0.11.6 policies create --skip-tls-verify -s admin -r \"rn:hydra:<.+>\" -a \"<.+>\" --allow"
   }
 }
