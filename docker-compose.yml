@@ -28,7 +28,7 @@ services:
     environment:
       - DATABASE_URL=$DATABASE_URL
       - SYSTEM_SECRET=$SYSTEM_SECRET
-      - ISSUER=https://localhost:4444
+      - ISSUER=https://localhost:9000
       - CONSENT_URL=http://localhost:9020/consent
       - FORCE_ROOT_CLIENT_CREDENTIALS=admin:demo-password
     networks: 
