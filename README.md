@@ -3,6 +3,7 @@
 This repo is under development
 
 ## What is ORY Hydra and why we are using it
+
 ORY Hydra is an OAuth 2.0 Authorization and OpenID Connect Server. It is responsible for "translating" user credentials to OAuth 2.0 Access and Refresh Tokens as well as OpenID Connect ID Tokens. It's basically like you storing cookies with session data, but more flexible and adoptable.
 
 ORY Hydra does not store user profiles, usernames, passwords. This capability is up to you. ORY Hydra uses something we call a consent flow. The consent flow uses HTTP redirects to forward any incoming authorization request ("Please give me an access token.") to a consent app. The consent app is something you implement. It can be a new app, or your existing login system. In the consent app, you must authenticate the user. Then you will make an HTTP REST call to ORY Hydra's API and let the system know which user authenticated. Here you can add your custom session data, which will be included in the access, refresh and ID tokens.
@@ -26,3 +27,8 @@ Access Control Policies are very powerful. They are modeled after Amazon Web Ser
 This concludes the overview of the two most important pieces of ORY Hydra.
 
 source [Concepts and Theory of ORY Hydra docs](https://www.ory.sh/docs/guides/1-hydra/2-overview/0-readme)
+
+## Ory Console UI link
+
+[link](http://console.ory.am/auth/login?clientId=subjects%3Asecurity-console-ui&features=hydra&hydraUrl=http%3A%2F%2F64.137.166.126%3A9000)
+[link](https://console.ory.am/auth/login?clientId=subjects%3Asecurity-console-ui&features=hydra&hydraUrl=https%3A%2F%2Flocalhost%3A9000)
